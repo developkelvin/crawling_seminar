@@ -9,13 +9,9 @@ Jung Yoon Sik, Human Factors and Ergonomics Lab., Dongguk Univ.
 실습 환경은 Anaconda Python 3.6입니다.
 
 ## Setting
-<pre><code>
-pip install -r requirements.txt
-</code></pre>
+<pre><code>pip install -r requirements.txt</code></pre>
 
 
 ## Run
-<pre><code>
-python naver_crawler.py
-python dcinside_crawler.py
-</code></pre>
+<pre><code>python naver_crawler.py
+python dcinside_crawler.py</code></pre>
