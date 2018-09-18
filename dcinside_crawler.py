@@ -50,7 +50,7 @@ def get_article(article_no):
 
     print(article_data)
 
-    f = open('crawling.csv', 'a', encoding='utf8')
+    f = open('dc_crawling_result.csv', 'a', encoding='utf8')
     for i in article_data:
         f.write(str(i)+", ")
     f.close()

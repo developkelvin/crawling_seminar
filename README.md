@@ -13,5 +13,14 @@ Jung Yoon Sik, Human Factors and Ergonomics Lab., Dongguk Univ.
 
 
 ## Run
-<pre><code>python naver_crawler.py
+<pre><code>#네이버 크롤러 실행
+python naver_crawler.py
+#디시 인사이드 크롤러 실행
 python dcinside_crawler.py</code></pre>
+
+## 실습1 네이버 크롤러 naver_crawler.py
+네이버 실시간 검색어 순위를 크롤링해서 출력합니다.
+
+## 실습2 디씨 인사이드 크롤러 dcinside_crawler.py
+디씨 인사이드 식물 갤러리에서 지정한 게시글 번호를 가진 게시글을 크롤링 하여 CSV 파일로 출력합니다. 
+
