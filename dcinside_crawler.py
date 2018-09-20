@@ -4,8 +4,6 @@
 from bs4 import BeautifulSoup
 import requests
 
-comment_url = 'http://gall.dcinside.com/comment/view'
-
 
 # 식물 갤러리의 게시글을 가져온다.
 def get_article(article_no):
@@ -13,6 +11,7 @@ def get_article(article_no):
     article_url = 'http://gall.dcinside.com/board/view/'
     # 쿠키를 계속 유지하기 위해 사용
     session = requests.Session()
+    session.get('http://gall.dcinside.com/board/view/')
     # 사람처럼 보이게 하기 위해 다음과 같은 헤더 적용
     headers = {
         'user-agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:61.0) Gecko/20100101 Firefox/61.0',
@@ -27,25 +26,22 @@ def get_article(article_no):
 
     soup = BeautifulSoup(response.text, 'html.parser')
 
-    user_info = soup.find(attrs={'class': 'user_layer'})
+    article_title = soup.find('span', attrs={'class':'title_subject'}).get_text().strip()
 
-    article_title = soup.select('.wt_subject > dd')[0].get_text().strip()
+    nickname = soup.find('span', attrs={'class':'nickname'}).get_text().strip()
 
-    user_id = user_info['user_id'].strip()
+    ip_address = soup.find('span', attrs={'class':'ip'}).get_text().strip()
 
-    nickname = user_info['user_name'].strip()
+    view_cnt = soup.find('span', attrs={'class':'gall_count'}).get_text().strip()
 
-    ip_address = soup.find(attrs={'class': 'li_ip'}).get_text().strip()
+    comment_cnt = soup.find('span', attrs={'class':'gall_comment'}).get_text().strip()
 
-    view_cnt = soup.find_all(attrs={'class': 'dd_num'})[0].get_text().strip()
+    content_all = soup.find('div', attrs={'class': 'writing_view_box'})
+    content = content_all.p.get_text().strip()
 
-    comment_cnt = soup.find_all(attrs={'class': 'dd_num'})[1].get_text().strip()
+    reg_dtime = soup.find('span', attrs={'class':'gall_date'}).get_text().strip()
 
-    content = soup.table.td.get_text().strip()
-
-    reg_dtime = soup.find('b').get_text().strip()
-
-    article_data = (gall_name, article_no, article_title, user_id, nickname,
+    article_data = (gall_name, article_no, article_title, nickname,
                     ip_address, view_cnt, comment_cnt, content, reg_dtime)
 
     print(article_data)
@@ -55,8 +51,7 @@ def get_article(article_no):
         f.write(str(i)+", ")
     f.close()
 
-
 if __name__ == "__main__":
     # http://gall.dcinside.com/board/view/?id=tree&no=243965 이 URL의 게시글을 크롤링 함.
-    get_article(243965)
+    get_article(244182)
 
